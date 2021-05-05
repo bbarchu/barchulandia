@@ -21,16 +21,16 @@ function App() {
             <Link to="/letras2">Demo letras - ej2</Link>
           </li>
           <li>
-            <Link to="/mundo1">Demo letras - ej2</Link>
+            <Link to="/mundo1">Planeta tierra 1</Link>
           </li>
           <li>
-            <Link to="/mundo2">Demo letras - ej2</Link>
+            <Link to="/mundo2">Planeta tierra 2</Link>
           </li>
           <li>
-            <Link to="/mundo3">Demo letras - ej2</Link>
+            <Link to="/mundo3">Planeta tierra 3</Link>
           </li>
           <li>
-            <Link to="/mundo4">Demo letras - ej2</Link>
+            <Link to="/mundo4">Planeta tierra 4</Link>
           </li>
           
 
