@@ -20,6 +20,20 @@ function App() {
           <li>
             <Link to="/letras2">Demo letras - ej2</Link>
           </li>
+          <li>
+            <Link to="/mundo1">Demo letras - ej2</Link>
+          </li>
+          <li>
+            <Link to="/mundo2">Demo letras - ej2</Link>
+          </li>
+          <li>
+            <Link to="/mundo3">Demo letras - ej2</Link>
+          </li>
+          <li>
+            <Link to="/mundo4">Demo letras - ej2</Link>
+          </li>
+          
+
         </ul>
 
         <Switch>
@@ -39,6 +53,30 @@ function App() {
             path="/letras2"
             render={() => {
               window.location.href = "demoLetras3D/ejercicio2.html";
+            }}
+          />
+           <Route
+            path="/mundo1"
+            render={() => {
+              window.location.href = "demoPlanetaTierra/index1.html";
+            }}
+          />
+           <Route
+            path="/mundo2"
+            render={() => {
+              window.location.href = "demoPlanetaTierra/index2.html";
+            }}
+          />
+           <Route
+            path="/mundo3"
+            render={() => {
+              window.location.href = "demoPlanetaTierra/index3.html";
+            }}
+          />
+           <Route
+            path="/mundo4"
+            render={() => {
+              window.location.href = "demoPlanetaTierra/index4.html";
             }}
           />
         </Switch>
