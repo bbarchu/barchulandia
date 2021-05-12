@@ -32,7 +32,9 @@ function App() {
           <li>
             <Link to="/mundo4">Planeta tierra 4</Link>
           </li>
-          
+          <li>
+            <Link to="/grilla">Grilla</Link>
+          </li>
 
         </ul>
 
@@ -77,6 +79,12 @@ function App() {
             path="/mundo4"
             render={() => {
               window.location.href = "demoPlanetaTierra/index4.html";
+            }}
+          />
+                  <Route
+            path="/grilla"
+            render={() => {
+              window.location.href = "demoGrillaNxM/index.html";
             }}
           />
         </Switch>
