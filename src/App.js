@@ -35,6 +35,10 @@ function App() {
           <li>
             <Link to="/grilla">Grilla</Link>
           </li>
+          <li>
+            <Link to="/cubo">Cubo</Link>
+          </li>
+
 
         </ul>
 
@@ -85,6 +89,12 @@ function App() {
             path="/grilla"
             render={() => {
               window.location.href = "demoGrillaNxM/index.html";
+            }}
+          />
+                     <Route
+            path="/cubo"
+            render={() => {
+              window.location.href = "demoMapeoUV/cubo.html";
             }}
           />
         </Switch>
