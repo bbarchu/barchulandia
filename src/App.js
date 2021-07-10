@@ -38,6 +38,9 @@ function App() {
           <li>
             <Link to="/cubo">Cubo</Link>
           </li>
+          <li>
+            <Link to="/tp1">TP1-Grua y edificio</Link>
+          </li>
 
 
         </ul>
@@ -95,6 +98,12 @@ function App() {
             path="/cubo"
             render={() => {
               window.location.href = "demoMapeoUV/cubo.html";
+            }}
+          />
+                     <Route
+            path="/tp1"
+            render={() => {
+              window.location.href = "tp1/index.html";
             }}
           />
         </Switch>
