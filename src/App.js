@@ -41,8 +41,9 @@ function App() {
           <li>
             <Link to="/tp1">TP1-Grua y edificio</Link>
           </li>
-
-
+          <li>
+            <Link to="/tp2">TP2</Link>
+          </li>
         </ul>
 
         <Switch>
@@ -64,46 +65,53 @@ function App() {
               window.location.href = "demoLetras3D/ejercicio2.html";
             }}
           />
-           <Route
+          <Route
             path="/mundo1"
             render={() => {
               window.location.href = "demoPlanetaTierra/index1.html";
             }}
           />
-           <Route
+          <Route
             path="/mundo2"
             render={() => {
               window.location.href = "demoPlanetaTierra/index2.html";
             }}
           />
-           <Route
+          <Route
             path="/mundo3"
             render={() => {
               window.location.href = "demoPlanetaTierra/index3.html";
             }}
           />
-           <Route
+          <Route
             path="/mundo4"
             render={() => {
               window.location.href = "demoPlanetaTierra/index4.html";
             }}
           />
-                  <Route
+          <Route
             path="/grilla"
             render={() => {
               window.location.href = "demoGrillaNxM/index.html";
             }}
           />
-                     <Route
+          <Route
             path="/cubo"
             render={() => {
               window.location.href = "demoMapeoUV/cubo.html";
             }}
           />
-                     <Route
+          <Route
             path="/tp1"
             render={() => {
               window.location.href = "tp1/index.html";
+            }}
+          />
+
+          <Route
+            path="/tp2"
+            render={() => {
+              window.location.href = "tp2/index.html";
             }}
           />
         </Switch>
