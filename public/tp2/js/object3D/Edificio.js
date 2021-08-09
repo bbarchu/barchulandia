@@ -72,7 +72,7 @@ export class Edificio {
     this.plantaBaja.setTexture(this.textures.concrete, false);
 
     this.ascensor = new Cubo(
-      5,
+      4,
       this.dim.losaGrande.pisos * 10 + this.dim.losaChica.pisos * 10 + 5,
       this.glHelper,
       this.colors.grey,
@@ -195,15 +195,15 @@ export class Edificio {
       losaGrande: {
         cantidadVentanasAncho: nroVentanasAncho,
         cantidadVentanasLargo: nroVentanasLargo,
-        ancho: nroVentanasAncho * ANCHO_VENTANA,
-        largo: nroVentanasLargo * ANCHO_VENTANA,
+        ancho: nroVentanasAncho * ANCHO_VENTANA + 2,
+        largo: nroVentanasLargo * ANCHO_VENTANA + 2,
         pisos: cantPisosPrimerTramo,
       },
       losaChica: {
         cantidadVentanasAncho: nroVentanasAncho - 2,
         cantidadVentanasLargo: nroVentanasLargo - 2,
-        ancho: nroVentanasAncho * ANCHO_VENTANA,
-        largo: nroVentanasLargo * ANCHO_VENTANA,
+        ancho: (nroVentanasAncho - 2) * ANCHO_VENTANA + 2,
+        largo: (nroVentanasLargo - 2) * ANCHO_VENTANA + 2,
         pisos: cantPisosSegTramo,
       },
       columnas: _columnas,
@@ -213,7 +213,7 @@ export class Edificio {
   draw(viewMatrix) {
     let identidad = glMatrix.mat4.create();
     glMatrix.mat4.scale(identidad, identidad, [0.02, 0.01, 0.02]);
-    glMatrix.mat4.translate(identidad, identidad, [5, -50, -0]);
+    glMatrix.mat4.translate(identidad, identidad, [5, 0, -0]);
     this.plantaBaja.drawFrom(
       false,
       viewMatrix,
@@ -406,30 +406,32 @@ export class Edificio {
   }
 
   _dibujarColumnas(viewMatrix, matrix) {
-    let cantidad = this.dim.columnas;
+    let columnas = this.dim.columnas;
+    let tramos = this.puntosDeControlLosa.length - 2;
+    let delta = (tramos / columnas) % tramos;
 
-    for (let tramo = 0; cantidad > 0; tramo += 4) {
-      if (tramo >= 11) {
-        tramo = 0;
-      }
+    for (let col = 0; col < columnas; col += 1) {
+      let position = col * delta;
+      let tramo = Math.floor(position);
+      let u = position - tramo;
 
-      for (
-        let pc = 0;
-        cantidad > 0 && pc < this.puntosDeControlLosa.length - 3;
-        pc += 2, cantidad--
-      ) {
-        this._dibujarColumna(pc, matrix, viewMatrix, tramo);
-      }
+      this._dibujarColumna(matrix, viewMatrix, u, tramo);
     }
   }
 
-  _dibujarColumna(i, matrix, viewMatrix, tramo) {
-    //console.log(tramo, "tramo", i, "pc")
-    let derivada = this.dibujadorBSplineCuadratico.getDerivada(0, [
-      this.puntosDeControlLosa[i],
-      this.puntosDeControlLosa[i + 1],
-      this.puntosDeControlLosa[i + 2],
+  _dibujarColumna(matrix, viewMatrix, u, tramo) {
+    let derivada = this.dibujadorBSplineCuadratico.getDerivada(u, [
+      this.puntosDeControlLosa[tramo],
+      this.puntosDeControlLosa[tramo + 1],
+      this.puntosDeControlLosa[tramo + 2],
     ]);
+
+    let punto = this.dibujadorBSplineCuadratico.curva(u, [
+      this.puntosDeControlLosa[tramo],
+      this.puntosDeControlLosa[tramo + 1],
+      this.puntosDeControlLosa[tramo + 2],
+    ]);
+
     let producto = this._cross(derivada, [0, 1, 0]);
     let norma =
       (producto[0] ** 2 + producto[1] ** 2 + producto[2] ** 2) ** (1 / 2);
@@ -439,17 +441,11 @@ export class Edificio {
       producto[2] / norma,
     ];
 
-    let curva = this.dibujadorBSplineCuadratico.getVertices([
-      this.puntosDeControlLosa[i],
-      this.puntosDeControlLosa[i + 1],
-      this.puntosDeControlLosa[i + 2],
-    ]);
-
     let matrixinicial = glMatrix.mat4.clone(matrix);
     glMatrix.mat4.translate(
       matrixinicial,
       matrixinicial,
-      this._sumCompVectores(curva[tramo], normal)
+      this._sumCompVectores(punto, normal)
     );
     this.columna.drawFrom(
       true,
@@ -504,7 +500,7 @@ export class Edificio {
   }
 
   _initCurvaLosa() {
-    const margen = 3;
+    const margen = 1;
     let losa = this.dim.losaGrande;
     let xi = -losa.largo / 2 - margen;
     let xf = losa.largo / 2 + margen;
