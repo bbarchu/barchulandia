@@ -72,7 +72,7 @@ export class Edificio {
     this.plantaBaja.setTexture(this.textures.concrete, false);
 
     this.ascensor = new Cubo(
-      4,
+      3.5,
       this.dim.losaGrande.pisos * 10 + this.dim.losaChica.pisos * 10 + 5,
       this.glHelper,
       this.colors.grey,
